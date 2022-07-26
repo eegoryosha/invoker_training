@@ -1,51 +1,21 @@
 <template>
     <section class="main">
         <div class="container">
-            <div class="game">
-                <div class="game__window">
-                    <skills-combo-description
-                        :position="'LEFT'"
-                        :skills="skillsListLeft"
-                    />
-                    <game-window />
-                    <skills-combo-description
-                        :position="'RIGHT'"
-                        :skills="skillsListRight"
-                    />
-                </div>
-
-                <skills-buttons />
-            </div>
+            <game />
         </div>
     </section>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-import GameWindow from '@/components/GameWindow.vue';
-import SkillsComboDescription from '@/components/SkillsComboDescription.vue';
-import skillsData from '@/data/Skills';
-import SkillsButtons from '@/components/SkillsButtons.vue';
+import { defineComponent } from 'vue';
+import Game from '@/components/Game.vue';
 
 export default defineComponent({
     name: 'Main',
     components: {
-        GameWindow, SkillsComboDescription,
-        SkillsButtons,
+        Game
     },
-    setup() {
-        const skillsList = ref(skillsData);
-        const skillsCount = skillsList.value.length;
-        const middleIndex = Math.round(skillsCount / 2);
-        const skillsListLeft = skillsList.value.slice(0, middleIndex);
-        const skillsListRight = skillsList.value.slice(middleIndex - 1, skillsCount - 1);
 
-        return {
-            skillsList,
-            skillsListLeft,
-            skillsListRight
-        };
-    }
 });
 
 </script>
@@ -71,13 +41,6 @@ section.main {
         left: 0;
         width: 100%;
         height: 100%;
-    }
-}
-.game {
-    margin: 0 auto;
-
-    &__window {
-        display: flex;
     }
 }
 .container {
