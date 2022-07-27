@@ -7,6 +7,11 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Main',
         component: Main
     },
+    {
+        path: '/invoker_training',
+        name: 'Main',
+        component: Main
+    },
 ];
 
 const router = createRouter({
