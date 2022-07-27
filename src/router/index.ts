@@ -9,7 +9,7 @@ const routes: Array<RouteRecordRaw> = [
     },
     {
         path: '/invoker_training',
-        name: 'Main',
+        name: 'Main-Github',
         component: Main
     },
 ];
