@@ -10,7 +10,7 @@ export default class SkillsActions {
         this.skillsInGame = skillsInGame;
     }
 
-    public checkCombo(spheres: ButtonSkillInterface[]): void {
+    public checkCombo(spheres: ButtonSkillInterface[]): number|null {
         const currentCombo = spheres.map((el: ButtonSkillInterface) => el.key);
 
         let skillIndex = null;
@@ -32,8 +32,10 @@ export default class SkillsActions {
             }
         }
 
-        if (skillIndex !== null) {
-            this.skillsInGame.value.skills.splice(skillIndex, 1);
-        }
+        return skillIndex;
+    }
+
+    public removeSkillInGameWindow(index: number): void {
+        this.skillsInGame.value.skills.splice(index, 1);
     }
 }

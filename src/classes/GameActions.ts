@@ -1,7 +1,9 @@
 import GameActionsInterface from '@/interfaces/classes/GameActionsInterface';
+import ScoreInterface from '@/interfaces/classes/ScoreInterface';
 import SkillInterface from '@/interfaces/SkillInterface';
 import SkillsInGameInterface from '@/interfaces/SkillsInGameInterface';
 import { Ref } from 'vue';
+import Score from './Score';
 import SkillGenerator from './SkillGenerator';
 import SkillsActions from './SkillsActions';
 
@@ -13,8 +15,9 @@ export default class GameActions implements GameActionsInterface {
     private isWindowFocus: boolean;
     public generator: SkillGenerator;
     public skill: SkillsActions;
+    public score: ScoreInterface;
 
-    constructor(allSkills: SkillInterface[], skillsInGame: Ref<SkillsInGameInterface>) {
+    constructor(allSkills: SkillInterface[], skillsInGame: Ref<SkillsInGameInterface>, score: Ref<number>, noMissCombo: Ref<number>) {
         if (this.instance) {
             return this.instance;
         }
@@ -23,8 +26,9 @@ export default class GameActions implements GameActionsInterface {
         this.skill = new SkillsActions(skillsInGame);
         this.gameInterval = null;
         this.allSkills = allSkills;
-        this.instance = this;
         this.isWindowFocus = false;
+        this.instance = this;
+        this.score = new Score(score, noMissCombo);
     }
 
     public startGame(): void {

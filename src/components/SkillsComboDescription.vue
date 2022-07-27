@@ -1,7 +1,7 @@
 <template>
     <div class="skills-description">
         <skill-combo-description
-            v-for="skill in skills"
+            v-for="skill in skillsForDescription"
             :key="skill.name"
             :skillIcon="skill.img"
             :combo="skill.combo"
@@ -11,9 +11,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import SkillComboDescription from '@/components/SkillComboDescription.vue';
+import { defineComponent, computed, ComputedRef } from 'vue';
 import SkillInterface from '@/interfaces/SkillInterface';
+import SkillComboDescription from '@/components/SkillComboDescription.vue';
 export default defineComponent({
     components: {
         SkillComboDescription
@@ -28,9 +28,21 @@ export default defineComponent({
             default: () => []
         }
     },
-    setup() {
-        return {
+    setup(props) {
+        const skillsForDescription: ComputedRef<SkillInterface[]> = computed(() => {
+            const skillsCount = props.skills.length; // количество всех способностей
+            const middleIndex = Math.round(skillsCount / 2); // индекс середины списка всех способностей
+            const skillsListLeft = props.skills.slice(0, middleIndex); // способности для левой части
+            const skillsListRight = props.skills.slice(middleIndex, skillsCount); // способнсоти для правой части
 
+            if (props.position == 'RIGHT')
+                return skillsListRight;
+            else
+                return skillsListLeft;
+        });
+
+        return {
+            skillsForDescription
         };
     }
 });

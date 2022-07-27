@@ -27,12 +27,7 @@ export default defineComponent({
             default: 'LEFT'
         }
     },
-    setup() {
 
-        return {
-
-        };
-    }
 });
 </script>
 
