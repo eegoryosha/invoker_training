@@ -1,5 +1,7 @@
 # invoker_training
 
+https://eegoryosha.github.io/invoker_training/
+
 ## Project setup
 ```
 npm install
