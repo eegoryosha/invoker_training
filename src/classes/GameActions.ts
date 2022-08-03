@@ -21,14 +21,17 @@ export default class GameActions implements GameActionsInterface {
         if (this.instance) {
             return this.instance;
         }
+
         this.skillsInGame = skillsInGame;
-        this.generator = new SkillGenerator(allSkills);
-        this.skill = new SkillsActions(skillsInGame);
         this.gameInterval = null;
         this.allSkills = allSkills;
         this.isWindowFocus = false;
-        this.instance = this;
+
+        this.generator = new SkillGenerator(allSkills);
+        this.skill = new SkillsActions(skillsInGame);
         this.score = new Score(score, noMissCombo);
+
+        this.instance = this;
     }
 
     public startGame(): void {
@@ -58,6 +61,7 @@ export default class GameActions implements GameActionsInterface {
     public stopGame(): void {
         if (this.gameInterval) {
             clearInterval(this.gameInterval);
+
             this.gameInterval = null;
         }
     }
